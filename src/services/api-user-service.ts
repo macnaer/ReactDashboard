@@ -16,7 +16,7 @@ const requests = {
 }
 
 const User = {
-    login: (user: any) => requests.post(`/signin`, user)
+    login: (user: any) => requests.post(`/login`, user)
 }
 
 export async function login(user: any){
