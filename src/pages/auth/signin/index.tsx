@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Formik, Field } from "formik";
 import { LoginSchema } from "../validation";
+import { useActions } from "../../../hooks/useActions";
 
 const initialValues = { email: "", password: "", rememberMe: false };
 
@@ -39,14 +40,16 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const { LoginUser } = useActions();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get("email"),
       password: data.get("password"),
-    });
-
+    };
+    LoginUser(user);
     /// data from server
   };
 
