@@ -6,7 +6,14 @@ import "./index.css";
 import App from "./App";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
+import { getAccessToken, getRehreshToken } from "./services/api-user-service";
 import { store } from "./store";
+import { AuthUser } from "./store/action-creators/userActions";
+
+const token = getAccessToken();
+if (token) {
+  AuthUser(token, "Data loaded from lockalStorrage", store.dispatch);
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

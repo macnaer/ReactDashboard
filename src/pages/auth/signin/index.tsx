@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Formik, Field } from "formik";
 import { LoginSchema } from "../validation";
 import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const initialValues = { email: "", password: "", rememberMe: false };
 
@@ -41,6 +42,11 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const { LoginUser } = useActions();
+  const { isAuth } = useTypedSelector((store) => store.UserReducer);
+
+  if (isAuth) {
+    return <Navigate to="/dashboard" />;
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
