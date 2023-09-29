@@ -16,6 +16,7 @@ import { Formik, Field } from "formik";
 import { LoginSchema } from "../validation";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import Loader from "../../../components/loader";
 
 const initialValues = { email: "", password: "", rememberMe: false };
 
@@ -42,10 +43,14 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const { LoginUser } = useActions();
-  const { isAuth } = useTypedSelector((store) => store.UserReducer);
+  const { isAuth, loading } = useTypedSelector((store) => store.UserReducer);
 
   if (isAuth) {
     return <Navigate to="/dashboard" />;
+  }
+
+  if (loading) {
+    return <Loader />;
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
