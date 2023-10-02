@@ -13,12 +13,18 @@ export enum UserActionTypes {
     FINISHED_REQUEST = "FINISHED_REQUEST",
     LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS",
     LOGIN_USER_ERROR = "LOGIN_USER_ERROR",
-    SERVER_ERROR = "SERVER_ERROR"
+    SERVER_ERROR = "SERVER_ERROR",
+    LOGOUT_USER = "LOGOUT_USER",
 }
 
 interface StartRequestAction {
     type: UserActionTypes.START_REQUEST
 }
+
+interface LogoutUserAction {
+    type: UserActionTypes.LOGOUT_USER;
+  }
+  
 
 interface FinishRequestAction {
     type: UserActionTypes.FINISHED_REQUEST
@@ -39,5 +45,5 @@ interface ServerErrorAction{
     payload: any
 }
 
-export type UserActions =  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction
+export type UserActions = | LogoutUserAction |  StartRequestAction | FinishRequestAction | LoginUserSuccessAction | LoginUserErrorAction | ServerErrorAction
 
