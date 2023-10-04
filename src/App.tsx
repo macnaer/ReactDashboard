@@ -5,6 +5,7 @@ import { useTypedSelector } from "./hooks/useTypedSelector";
 import NotFound from "./pages/notFound";
 import DashboardLayout from "./container/dashboardLayout";
 import DefaultPage from "./pages/dafaultPage";
+import AllUsers from "./pages/users/allUsers";
 
 function App() {
   const { isAuth, user } = useTypedSelector((store) => store.UserReducer);
@@ -16,9 +17,14 @@ function App() {
           {user.role === "Administrator" && (
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DefaultPage />} />
+              <Route path="users" element={<AllUsers />} />
             </Route>
           )}
-          {user.role === "User" && <Route path="/" />}
+          {user.role === "User" && (
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route path="users" element={<AllUsers />} />
+            </Route>
+          )}
         </>
       )}
 
